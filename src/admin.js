@@ -1,5 +1,5 @@
 import { createApp } from 'vue';
-import './style.css';
+import './index.css';
 import App from '../apps/Admin.vue';
 
 createApp(App).mount('#app-admin')

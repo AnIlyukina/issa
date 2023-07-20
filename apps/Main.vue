@@ -1,12 +1,20 @@
 <script setup>
-let a = 'aas'
-let b = "s"
+import Login from '../src/components/auth/login.vue'
 
 </script>
 
 <template>
-  <div>
-    Админка
+  <div class="
+    flex
+    bg-auth-white
+    dark:bg-auth-dark1
+    w-[100%]
+    h-[100vh]
+    bg-cover
+    bg-repeat
+    "
+    >
+    <Login/>
   </div>
 </template>
 
