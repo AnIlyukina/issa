@@ -1,23 +1,25 @@
 <script setup>
-import Login from '../src/components/auth/login.vue'
 
 </script>
 
 <template>
-  <div class="
+  <section class="
+    main-anim
     flex
     bg-auth-white
-    dark:bg-auth-dark1
+    dark:bg-auth-dark2
     w-[100%]
+    bg-center
     h-[100vh]
     bg-cover
-    bg-repeat
+    bg-no-repeat
     "
     >
-    <Login/>
-  </div>
+    <transition name="slide">
+      <router-view></router-view>
+    </transition>
+  </section>
 </template>
 
 <style scoped>
-
 </style>

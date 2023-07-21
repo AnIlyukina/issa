@@ -7,11 +7,14 @@ module.exports = {
   ],
   darkMode: "class",
   theme: {
+    screens: {
+      xs: "450px",
+    },
     extend: {
       backgroundImage: {
         "auth-white": "url('/src/assets/images/bg-auth.jpeg')",
         "auth-dark1": "url('/src/assets/images/bg-auth-dark-1.jpeg')",
-        "auth-dark2": "url('/src/assets/images/bg-auth-dark-2.jpeg.jpeg')",
+        "auth-dark2": "url('/src/assets/images/bg-auth-dark-2.jpeg')",
       },
     },
   },
