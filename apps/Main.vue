@@ -1,6 +1,6 @@
 <script setup>
 import { shallowRef } from 'vue';
-import AuthLayouts from '../src/layouts/AuthLayouts.vue'
+//import AuthLayouts from '../src/layouts/AuthLayouts.vue'
 import MainLayouts from '../src/layouts/MainLayouts.vue';
 
 const currentLayouts = shallowRef(MainLayouts)

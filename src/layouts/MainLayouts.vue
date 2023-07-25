@@ -39,7 +39,7 @@ import UIMenuItem from '../../src/components/UI/UIMenuItem.vue'
 
         </div>
 
-        <div>
+        <div class="absolute bottom-[0] w-[100%]">
           <u-i-menu-item
             :type="'user-photo'"
             :bg-color="'#333'"

@@ -39,8 +39,17 @@ defineProps({
   transition: top .5s;
 }
 
+.input-box input:-webkit-autofill,
+.input-box input:-webkit-autofill:hover,
+.input-box input:-webkit-autofill:focus,
+.input-box input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: #fff !important;
+    background: #fff; 
+}
 .input-box input:focus~label,
-.input-box input:valid~label {
+.input-box input:valid~label,
+.input-box input:-webkit-autofill~label {
   top: -5px;
 }
 </style>
