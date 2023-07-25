@@ -1,24 +1,18 @@
 <script setup>
+import { shallowRef } from 'vue';
+import AuthLayouts from '../src/layouts/AuthLayouts.vue'
+import MainLayouts from '../src/layouts/MainLayouts.vue';
+
+const currentLayouts = shallowRef(MainLayouts)
 
 </script>
 
 <template>
-  <section class="
-    main-anim
-    flex
-    bg-auth-white
-    dark:bg-auth-dark2
-    w-[100%]
-    bg-center
-    h-[100vh]
-    bg-cover
-    bg-no-repeat
-    "
-    >
-    <transition name="slide">
-      <router-view></router-view>
-    </transition>
-  </section>
+  <component
+    :is="currentLayouts"
+  >
+    <router-view></router-view>
+  </component>
 </template>
 
 <style scoped>
