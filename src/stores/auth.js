@@ -2,9 +2,12 @@ import { defineStore } from "pinia";
 import { ref } from 'vue';
 import api from "../api/api.js";
 
+import axios from 'axios'
+
 export const useAuthStore = defineStore('auth', () => { 
   let isAuth = ref(false)
-  let authToken = ref('')
+  let user = ref({})
+  // let authToken = ref('')
   // let authUser = ref('')
   // let authLoading = ref('');
 
@@ -24,14 +27,18 @@ export const useAuthStore = defineStore('auth', () => {
     console.log(username, password);
     return new Promise(async (resolve, reject) => {
       try {
-        const data = await api.post("/login", { username, password });
+        const response = await api.post("/login", { username, password });
         console.log(data)
-        
-        authToken.value = data.token
-        //authUser.value = data.user
+
+        localStorage.setItem('token', response.data.token)
+        user.value = response.data.user
+
+        isAuth.value = true;
+
+      
         resolve(true);
       } catch (error) {
-        reject(error);
+        reject(e.response.data?.message);
       }
     });
   };
@@ -45,7 +52,30 @@ export const useAuthStore = defineStore('auth', () => {
 
         resolve(true);
       } catch (error) {
-        reject(error);
+        reject(e.response.data?.message);
+      }
+    });
+  };
+
+  const init = async() => {
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_API_DOMAIN}/refresh`);
+    } catch (e) {
+      console.log(e.response.data?.message);
+    }
+
+  }
+
+  const logout = () => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const data = await api.post("/logout");
+        localStorage.removeItem('token')
+        user = {}
+
+        resolve(true);
+      } catch (error) {
+        reject(e.response.data?.message);
       }
     });
   };
@@ -57,5 +87,6 @@ export const useAuthStore = defineStore('auth', () => {
     register,
     login,
     refreshToken,
+    logout,
   };
 })
