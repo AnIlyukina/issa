@@ -1,6 +1,10 @@
 <script setup>
 defineProps({
-  formName: String
+  formName: String,
+  type: {
+    type: String,
+    default: ''
+  }
 })
 
 const emits = defineEmits(['submitForm'])
@@ -14,7 +18,7 @@ const onSubmitForm = () => {
 <template>
   <div
     class="
-      xs:border-2 xs:w-[400px] xs:h-fit xs:p-[30px] xs:border-[rgba(255, 255, 255, .5)]
+      sm:border-2 sm:h-fit sm:p-[30px] sm:border-[rgba(255, 255, 255, .5)]
       bg-transparent
       backdrop-blur-md
       m-auto
@@ -23,8 +27,9 @@ const onSubmitForm = () => {
       flex justify-center
       items-center
       w-[100%]
-      h-[100vh]
+      sm:h-[100vh]
       p-[15px]"
+    :class="[type === 'questionnaire' ? 'sm:w-[80%]' : 'xs:w-[400px]']"
   >
     <form 
       class="w-[100%]"
