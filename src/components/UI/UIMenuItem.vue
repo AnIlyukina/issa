@@ -1,13 +1,22 @@
 <script setup>
-defineProps({
+
+import {toRefs} from 'vue';
+
+const props = defineProps({
   nameItem: String,
   bgColor: String,
-  nameIcon:String,
+  nameIcon: String,
+  isMenuActive: Boolean
 })
+const { nameItem, bgColor, nameIcon, isMenuActive} = toRefs(props)
+console.log(isMenuActive, 'isMenuActive');
 
 </script>
 <template>
-  <li class="relative" :style="`--bg:${bgColor}`">
+  <li
+    class="relative"
+    :class="[!isMenuActive ? 'active' : '']"
+    :style="`--bg:${bgColor}`">
     <a href="#" class="relative flex whitespace-nowrap ">
       <div v-if="nameIcon"  class="icon relative flex justify-center items-center min-w-[60px] h-[70px] text-[1.5em] transition-[.5s]" ><font-awesome-icon class="text-red" :icon="nameIcon"/></div>
       <p v-if="nameItem" class="relative h-[70px] flex items-center pl-[15px] uppercase tracking-wider transition-[.5s] ">{{ nameItem }}</p>
@@ -26,6 +35,11 @@ defineProps({
 li:hover a .icon,
 li:hover a p{
   color:var(--bg);
+}
+li.active{
+  background: var(--bg);
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
 }
 
 </style>
