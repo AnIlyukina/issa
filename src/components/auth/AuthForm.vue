@@ -3,6 +3,12 @@ defineProps({
   formName: String
 })
 
+const emits = defineEmits(['submitForm'])
+
+const onSubmitForm = () => {
+  emits('submitForm')
+}
+
 </script>
 
 <template>
@@ -20,10 +26,15 @@ defineProps({
       h-[100vh]
       p-[15px]"
   >
-    <form class="w-[100%]">
+    <form 
+      class="w-[100%]"
+      novalidate
+      @submit.prevent="onSubmitForm"
+      >
       <h2 class="
         text-[2em]
         font-bold
+        mb-[30px]
         dark:text-white
         text-center"
       >

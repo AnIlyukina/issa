@@ -1,11 +1,32 @@
 <script setup>
+const emits = defineEmits(['update:modelValue'])
+
 defineProps({
-  label: String,
-  type: String,
-  iconName: String
+   modelValue: {
+    type: String,
+    required: true
+  },
+  label: {
+    type: String,
+    required: true
+  },
+  type: {
+    type: String,
+    required: true
+  },
+  iconName: {
+    type: String,
+    default: ''
+  },
+  error: {
+    type: String,
+    default: ''
+  }
 })
 
-
+const changeValue = (event) => {
+  emits('update:modelValue', event.target.value)
+}
 </script>
 
 <template>
@@ -13,7 +34,6 @@ defineProps({
     class="
       input-box
       relative
-      my-[30px]
       border-b-2
       border-black
       dark:border-white
@@ -29,8 +49,29 @@ defineProps({
       ">
         <font-awesome-icon :icon="iconName" class="icon"/>
     </span>
-    <input class="pr-[35px] pl-[5px] w-[100%] h-[50px] bg-transparent outline-none  dark:text-white" :type="type" required/>
+    <input
+      :value="modelValue"
+      class="
+        pr-[35px]
+        pl-[5px]
+        w-[100%]
+        h-[50px]
+        bg-transparent
+        outline-none
+        dark:text-white"
+        :type="type"
+        required
+        @input="changeValue"  
+      />
     <label class="absolute top-[50%] left-[5px] translate-y-[-50%] dark:text-white pointer-events-none">{{ label }}</label>
+  </div>
+  <div class="h-[30px]">
+    <span
+      v-show="error"
+      class="block font-bold text-[13px] text-red-500 text-center"
+      >
+      {{ error }}
+    </span>
   </div>
 </template>
 

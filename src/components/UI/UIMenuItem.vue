@@ -1,14 +1,14 @@
 <script setup>
 
-import {toRefs} from 'vue';
+// import {toRefs} from 'vue';
 
-const props = defineProps({
+defineProps({
   nameItem: String,
   bgColor: String,
   nameIcon: String,
   isMenuActive: Boolean
 })
-const { nameItem, bgColor, nameIcon, isMenuActive} = toRefs(props)
+//const { nameItem, bgColor, nameIcon, isMenuActive} = toRefs(props)
 console.log(isMenuActive, 'isMenuActive');
 
 </script>

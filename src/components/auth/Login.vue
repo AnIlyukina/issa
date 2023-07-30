@@ -3,20 +3,94 @@ import UIInput from '../UI/UIinput.vue'
 import UIAuthButton from '../UI/UIAuthButton.vue';
 import AuthForm from '../auth/AuthForm.vue'
 
+import { reactive } from 'vue';
+import { useAuthStore } from '../../stores/auth';
+
+
+const store = useAuthStore()
+
+const initialStateFrom = {
+  username: '',
+  password: '',
+}
+const initialStateError = {
+  username: '',
+  password: '',
+}
+
+let stateError = reactive({
+  ...initialStateError
+})
+const stateForm = reactive({
+  ...initialStateFrom,
+})
+
+
+const checkValidForm = () => {
+  let errors = false
+  for (let key in stateError) {
+    stateError[key] = ''
+
+    if (key === 'username') {
+      if (!stateForm[key]) {
+        stateError[key] = 'Заполни email'
+        errors = true
+      } else {
+        const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        if (reg.test(stateForm.username) == false) {
+          stateError[key] = 'Введите корректный email'
+          errors = true
+        }
+      }
+    }
+    if (key === 'password') {
+      if (!stateForm[key]) {
+        stateError[key] = 'Заполни пароль' 
+        errors = true
+      } else {
+        if (stateForm[key].length < 8) {
+          stateError[key] = 'Пароль не менее 8 символов' 
+        }
+      }  
+    }
+
+  }
+  return errors
+} 
+
+const signIn = async () => {
+  const error = checkValidForm()
+  if (error) {
+    return
+  }
+
+  try {
+    await store.login(stateForm)
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+
 </script>
 <template>
   <auth-form
     :form-name="'Login'"
+    @submit-form="signIn"
   >
     <u-i-input
+      v-model="stateForm.username"
       :type="'text'"
       :label="'Email'"
       :icon-name="'fa-solid fa-envelope'"
+      :error="stateError.username"
     />
     <u-i-input
+      v-model="stateForm.password"
       :type="'password'"
       :label="'Password'"
       :icon-name="'fa-solid fa-lock'"
+      :error="stateError.password"
     />
     <div
       class="
@@ -25,7 +99,8 @@ import AuthForm from '../auth/AuthForm.vue'
           mb-[15px]
           text-[0.9em]
           dark:text-white
-          flex
+          inline-flex
+          w-[100%]
           justify-between
         ">
       <label for="" class="mr-[3px]">
