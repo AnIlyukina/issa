@@ -1,7 +1,7 @@
 <script setup>
 const emits = defineEmits(['update:modelValue'])
 
-import {reactive, toRefs} from 'vue';
+import { toRefs } from 'vue';
 
 const props = defineProps({
   modelValue: {
@@ -24,19 +24,19 @@ const genders = [
   {
     id: 1,
     name: 'female',
-    color: 'pink',
+    color: 'bg-pink-400',
     icon: 'fa-solid fa-venus'
   },
   {
     id: 2,
     name: 'male',
-    color: 'blue',
+    color: 'bg-blue-300',
     icon: 'fa-solid fa-mars'
   },
   {
     id: 3,
     name: 'others',
-    color: 'gray',
+    color: 'bg-gray-400',
     icon: 'fa-solid fa-transgender'
   }
 ]
@@ -73,7 +73,7 @@ const isSelected = (id) => {
 
 <template>
   <div>
-    <h3>
+    <h3 class="dark:text-white">
       {{ label }}
     </h3>
     <ul class="flex h-[70px] justify-around items-center">
@@ -84,17 +84,21 @@ const isSelected = (id) => {
           rounded-2xl cursor-pointer
           flex items-center justify-center
         "
-        :class="isSelected(gender.id) !== -1 ? 'bg-red-800' : `bg-${gender.color}-400`"
+        :class="isSelected(gender.id) === -1 ? 'border border-1 border-black dark:border-white' : `${gender.color}`"
         @click="selectGender(gender)"
       >
          <span
            v-if="gender.icon"
          >
-          <font-awesome-icon size="lg" :icon="gender.icon" class="icon"/>
+          <font-awesome-icon size="lg" :icon="gender.icon" class="icon dark:text-white"/>
         </span>
 
       </li>
     </ul>
   </div>
 </template>
+
+<style scoped>
+
+</style>
 

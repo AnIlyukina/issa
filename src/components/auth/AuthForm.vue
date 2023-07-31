@@ -27,7 +27,7 @@ const onSubmitForm = () => {
       flex justify-center
       items-center
       w-[100%]
-      sm:h-[100vh]
+      h-[100vh]
       p-[15px]"
     :class="[type === 'questionnaire' ? 'sm:w-[800px]' : 'xs:w-[400px]']"
   >

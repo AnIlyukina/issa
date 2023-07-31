@@ -9,7 +9,7 @@
     dark:bg-auth-dark2
     w-[100%]
     bg-center
-    sm:h-[100vh]
+    h-[100vh]
     bg-cover
     bg-no-repeat
     "

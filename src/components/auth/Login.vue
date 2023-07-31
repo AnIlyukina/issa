@@ -45,18 +45,18 @@ const checkValidForm = () => {
     }
     if (key === 'password') {
       if (!stateForm[key]) {
-        stateError[key] = 'Заполни пароль' 
+        stateError[key] = 'Заполни пароль'
         errors = true
       } else {
         if (stateForm[key].length < 8) {
-          stateError[key] = 'Пароль не менее 8 символов' 
+          stateError[key] = 'Пароль не менее 8 символов'
         }
-      }  
+      }
     }
 
   }
   return errors
-} 
+}
 
 const signIn = async () => {
   const error = checkValidForm()
@@ -75,7 +75,7 @@ const signIn = async () => {
 </script>
 <template>
   <auth-form
-    :form-name="'Login'"
+    :form-name="'Войти'"
     @submit-form="signIn"
   >
     <u-i-input
@@ -88,7 +88,7 @@ const signIn = async () => {
     <u-i-input
       v-model="stateForm.password"
       :type="'password'"
-      :label="'Password'"
+      :label="'Пароль'"
       :icon-name="'fa-solid fa-lock'"
       :error="stateError.password"
     />
@@ -105,9 +105,9 @@ const signIn = async () => {
         ">
       <label for="" class="mr-[3px]">
         <input type="checkbox"/>
-        Remember me
+        Запомнить меня
       </label>
-      <a href="#" class="hover:underline ">Forgot Password?</a>
+      <a href="#" class="hover:underline ">Забыли пароль?</a>
     </div>
 
     <u-i-auth-button
@@ -124,7 +124,7 @@ const signIn = async () => {
           dark:text-white"
     >
       <p>
-        Don't have an account?
+        У тебя нет аккаунта?
         <a
           class="
             font-bold
@@ -133,7 +133,7 @@ const signIn = async () => {
           href="#"
           @click="$router.push({name: 'Register'})"
         >
-          Register
+          Зарегистрираться
         </a>
       </p>
     </div>

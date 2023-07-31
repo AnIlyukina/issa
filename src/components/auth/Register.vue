@@ -36,7 +36,7 @@ const checkValidForm = () => {
 
     if (key === 'isAgreed') {
       if (!stateForm[key]) {
-        stateError[key] = 'Прочитай политику' 
+        stateError[key] = 'Прочитай политику'
         errors = true
       }
     }
@@ -54,29 +54,17 @@ const checkValidForm = () => {
     }
     if (key === 'password') {
       if (!stateForm[key]) {
-        stateError[key] = 'Заполни пароль' 
+        stateError[key] = 'Заполни пароль'
         errors = true
       } else {
         if (stateForm[key].length < 8) {
-          stateError[key] = 'Пароль не менее 8 символов' 
-        }
-      }  
-    }
-
-    if (key === 'rePassword') {
-      if (!stateForm[key]) {
-        stateError[key] = 'Повтори пароль' 
-        errors = true
-      } else {
-        if (stateForm[key] !== stateForm.password) {
-          stateError[key] = 'Пароли не совпадает' 
-          errors = true
+          stateError[key] = 'Пароль не менее 8 символов'
         }
       }
     }
   }
   return errors
-} 
+}
 
 const signUp = async () => {
   const errors = checkValidForm()
@@ -98,7 +86,7 @@ const signUp = async () => {
 
 <template>
   <auth-form
-    :form-name="'Registration'"
+    :form-name="'Регистрация'"
     @submit-form="signUp"
   >
     <u-i-input
@@ -111,25 +99,17 @@ const signUp = async () => {
     <u-i-input
       v-model="stateForm.password"
       :type="'password'"
-      :label="'Password'"
+      :label="'Пароль'"
       :icon-name="'fa-solid fa-lock'"
       :error="stateError.password"
     />
-    <u-i-input
-      v-model="stateForm.rePassword"
-      :type="'password'"
-      :label="'Repeat password'"
-      :icon-name="'fa-solid fa-lock'"
-      :error="stateError.rePassword"
-    />
-
     <div
       class="
           dark:text-white
         ">
       <label for="" class="mr-[3px]">
         <input v-model="stateForm.isAgreed" type="checkbox"  :error="stateError.rePassword"/>
-        By selecting "Register", you are confirming that you have read and agree Privacy Policy
+        Нажимая кнопку "Зарегистрироваться» я подтверждаю, что ознакомился с Политикой Конфиденциальности.
       </label>
     </div>
     <div class="h-[30px]">
@@ -143,7 +123,7 @@ const signUp = async () => {
 
     <u-i-auth-button
       :type="'submit'"
-      :name="'Register'"
+      :name="'Зарегистрироваться'"
     />
 
     <div
@@ -155,7 +135,7 @@ const signUp = async () => {
           dark:text-white"
     >
       <p>
-        Do have an account?
+        У тебя есть аккаунт?
         <a
           class="
             font-bold
@@ -164,7 +144,7 @@ const signUp = async () => {
           href="#"
           @click="$router.push({name: 'Login'})"
         >
-          Login
+          Войти
         </a>
       </p>
     </div>
