@@ -29,9 +29,9 @@ const onSubmitForm = () => {
       w-[100%]
       sm:h-[100vh]
       p-[15px]"
-    :class="[type === 'questionnaire' ? 'sm:w-[80%]' : 'xs:w-[400px]']"
+    :class="[type === 'questionnaire' ? 'sm:w-[800px]' : 'xs:w-[400px]']"
   >
-    <form 
+    <form
       class="w-[100%]"
       novalidate
       @submit.prevent="onSubmitForm"

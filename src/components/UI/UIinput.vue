@@ -40,6 +40,7 @@ const changeValue = (event) => {
     "
   >
     <span
+      v-if="iconName"
       class="
         absolute
         right-[8px]
@@ -61,7 +62,7 @@ const changeValue = (event) => {
         dark:text-white"
         :type="type"
         required
-        @input="changeValue"  
+        @input="changeValue"
       />
     <label class="absolute top-[50%] left-[5px] translate-y-[-50%] dark:text-white pointer-events-none">{{ label }}</label>
   </div>
@@ -86,7 +87,7 @@ const changeValue = (event) => {
 .input-box input:-webkit-autofill:active {
     transition: background-color 5000s ease-in-out 0s;
     -webkit-text-fill-color: #fff !important;
-    background: #fff; 
+    background: #fff;
 }
 .input-box input:focus~label,
 .input-box input:valid~label,
