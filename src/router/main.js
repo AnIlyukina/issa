@@ -4,7 +4,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 // These can be imported from other files
 import Register from '../components/auth/Register.vue'
 import Login from '../components/auth/Login.vue'
-import Questionnaire from '../components/auth/Questionnaire.vue'
+// import Questionnaire from '../components/auth/Questionnaire.vue'
+import Dashboard from "../components/Dashboard.vue";
 
 
 // 2. Define some routes
@@ -13,18 +14,26 @@ import Questionnaire from '../components/auth/Questionnaire.vue'
 const routes = [
   {
     name: "Register",
-    path: "/register/step/1",
+    path: "/register",
     component: Register,
   },
-  {
-    name: "Questionnaire",
-    path: "/register/step/2",
-    component: Questionnaire,
-  },
+  // {
+  //   name: "Questionnaire",
+  //   path: "/register/step/2",
+  //   component: Questionnaire,
+  // },
   {
     name: "Login",
     path: "/login",
     component: Login,
+  },
+  {
+    name: "Dashboard",
+    path: "/",
+    component: Dashboard,
+    meta: {
+      requiresAuth: true,
+    },
   },
 ];
 
@@ -36,5 +45,17 @@ const  router = createRouter({
     history: createWebHistory(),
     routes, // short for `routes: routes`
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((route) => route.meta?.requiresAuth)) {
+    if (localStorage.getItem('token')) {
+      next();
+    } else {
+      next("/login");
+    }
+  } else {
+    next();
+  }
+});
 
 export default router

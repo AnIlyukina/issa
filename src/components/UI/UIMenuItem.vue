@@ -8,8 +8,6 @@ defineProps({
   nameIcon: String,
   isMenuActive: Boolean
 })
-//const { nameItem, bgColor, nameIcon, isMenuActive} = toRefs(props)
-console.log(isMenuActive, 'isMenuActive');
 
 </script>
 <template>

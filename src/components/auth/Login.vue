@@ -6,7 +6,10 @@ import AuthForm from '../auth/AuthForm.vue'
 import { reactive } from 'vue';
 import { useAuthStore } from '../../stores/auth';
 
+import { useRouter } from 'vue-router';
 
+
+const router = useRouter()
 const store = useAuthStore()
 
 const initialStateFrom = {
@@ -66,6 +69,7 @@ const signIn = async () => {
 
   try {
     await store.login(stateForm)
+    router.push({name: 'Main'})
   } catch (err) {
     console.log(err)
   }

@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
-import { ref } from 'vue';
+import { ref, computed } from "vue";
 import api from "../api/api.js";
 
 import axios from 'axios'
 
 export const useAuthStore = defineStore('auth', () => { 
-  let isAuth = ref(false)
+  const isAuth = computed(() => localStorage.getItem('token'))
   let user = ref({})
   // let authToken = ref('')
   // let authUser = ref('')
@@ -14,6 +14,7 @@ export const useAuthStore = defineStore('auth', () => {
   const register = ({email, password}) => {
     return new Promise (async (resolve, reject) => {
       try {
+        console.log({ email, password });
         const data = await api.post("/registration", { email, password });
         console.log(data, 'data')
         resolve(true)
@@ -28,17 +29,17 @@ export const useAuthStore = defineStore('auth', () => {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await api.post("/login", { username, password });
-        console.log(data)
-
+        console.log(response, "response");
+        
         localStorage.setItem('token', response.data.token)
-        user.value = response.data.user
+        //user.value = response.data.user
 
         isAuth.value = true;
 
       
         resolve(true);
       } catch (error) {
-        reject(e.response.data?.message);
+        reject(error.response.data?.message);
       }
     });
   };
