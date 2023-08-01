@@ -1,6 +1,9 @@
 <script setup>
 import AuthForm from '../auth/AuthForm.vue';
 import UIInput from '../UI/UIinput.vue';
+
+import ProgressStep from '../auth/ProgressStep.vue'
+
 import UIAuthButton from '../UI/UIAuthButton.vue';
 import { reactive } from 'vue';
 
@@ -8,15 +11,15 @@ import { useAuthStore } from '/src/stores/auth';
 //import { storeToRefs } from 'pinia'
 
 const initialStateFrom = {
-  username: '',
+  email: '',
   password: '',
-  rePassword: '',
+  birthday: '',
   isAgreed: false,
 }
 const initialStateError = {
-  username: '',
+  email: '',
   password: '',
-  rePassword: '',
+  birthday: '',
   isAgreed: '',
 }
 
@@ -40,13 +43,13 @@ const checkValidForm = () => {
         errors = true
       }
     }
-    if (key === 'username') {
+    if (key === 'email') {
       if (!stateForm[key]) {
         stateError[key] = 'Заполни email'
         errors = true
       } else {
         const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
-        if (reg.test(stateForm.username) == false) {
+        if (reg.test(stateForm.email) == false) {
           stateError[key] = 'Введи корректный email'
           errors = true
         }
@@ -73,10 +76,7 @@ const signUp = async () => {
   }
 
   try {
-    await store.register({
-      email: stateForm.username,
-      password: stateForm.password,
-    })
+    await store.register(stateForm)
   } catch (err) {
     console.log(err)
   }
@@ -85,16 +85,17 @@ const signUp = async () => {
 </script>
 
 <template>
+  <progress-step/>
   <auth-form
     :form-name="'Регистрация'"
     @submit-form="signUp"
   >
     <u-i-input
-      v-model="stateForm.username"
+      v-model="stateForm.email"
       :type="'text'"
       :label="'Email'"
       :icon-name="'fa-solid fa-envelope'"
-      :error="stateError.username"
+      :error="stateError.email"
     />
     <u-i-input
       v-model="stateForm.password"
@@ -108,7 +109,7 @@ const signUp = async () => {
           dark:text-white
         ">
       <label for="" class="mr-[3px]">
-        <input v-model="stateForm.isAgreed" type="checkbox"  :error="stateError.rePassword"/>
+        <input v-model="stateForm.isAgreed" type="checkbox"/>
         Нажимая кнопку "Зарегистрироваться» я подтверждаю, что ознакомился с Политикой Конфиденциальности.
       </label>
     </div>
