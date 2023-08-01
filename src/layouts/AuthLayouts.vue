@@ -5,6 +5,7 @@
   <section class="
     main-anim
     flex
+    flex-col
     bg-auth-white
     dark:bg-auth-dark2
     w-[100%]
