@@ -6,14 +6,15 @@ import api from "../api/api.js";
 export const useAuthStore = defineStore('auth', () => {
   const isAuth = computed(() => localStorage.getItem('token'))
 
-  //let user = ref({})
+  const authStatus = ref('registration');
 
   const register = (stateForm) => {
     return new Promise (async (resolve, reject) => {
       try {
-        const response = await api.post("/registration", stateForm);
-
-        setToken(response.data)
+        // TODO расскоментировать
+        // const response = await api.post("/registration", stateForm);
+        // setToken(response.data)
+        authStatus.value = 'fillProfile'
 
         resolve(true)
       } catch (error) {
@@ -77,6 +78,7 @@ export const useAuthStore = defineStore('auth', () => {
 
 
   return {
+    authStatus,
     isAuth,
     register,
     login,

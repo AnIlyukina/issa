@@ -1,6 +1,7 @@
 <script setup>
-import UIInput from "../UI/UIinput.vue";
+import moment from 'moment';
 
+import UIInput from "../UI/UIinput.vue";
 import UIAuthButton from "../UI/UIAuthButton.vue";
 
 import { reactive } from "vue";
@@ -63,16 +64,25 @@ const checkValidForm = () => {
         }
       }
     }
+    if (key === "birthday") {
+      if (!stateForm[key]) {
+        stateError[key] = "Заполни дату рождения";
+        errors = true;
+      } else {
+        //TODO валидируем дату рождения
+      }
+    }
   }
   return errors;
 };
 
 const signUp = async () => {
-  const errors = checkValidForm();
-  if (errors) {
-    return;
-  }
-
+  // TODO расскоментировать
+  // const errors = checkValidForm();
+  // if (errors) {
+  //   return;
+  // }
+  console.log(stateForm, 'signUp');
   try {
     await store.register(stateForm);
   } catch (err) {
@@ -97,6 +107,12 @@ const signUp = async () => {
     :icon-name="'fa-solid fa-lock'"
     :error="stateError.password"
   />
+  <u-i-input
+    v-model="stateForm.birthday"
+    :type="'date'"
+    :icon-name="'fa-solid fa-cake-candles'"
+    :error="stateError.birthday"
+  />
   <div class="dark:text-white">
     <label for="" class="mr-[3px]">
       <input v-model="stateForm.isAgreed" type="checkbox" />
@@ -113,7 +129,7 @@ const signUp = async () => {
     </span>
   </div>
 
-  <u-i-auth-button :type="'submit'" :name="'Зарегистрироваться'" />
+  <u-i-auth-button :type="'submit'" :name="'Зарегистрироваться'" @click.prevent="signUp" />
 
   <div class="text-center mt-[25px] w-[100%] text-[.9em] dark:text-white">
     <p>

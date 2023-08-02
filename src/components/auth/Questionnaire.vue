@@ -8,15 +8,23 @@ import {reactive} from 'vue';
 const initialStateQuestionnaire = {
   name: '', // имя отображаемое в профиле
   city: 1, // локация пользователя
-  orientation: 1, // гетеро гомо ...
-  zodiacSign: 1, // знак зодика
   gender: [1], // пол
   genderLooking: [1, 2], // пол который ищу
-  aims: 1, // цель на сайте
-  bestDate: 1,// лучшая свиданка
-  badHabits: [1,2], // прохие привычки
-  important: [1,2, 3], // что для тебя важно
-  hobby: [1,2,3], // хобби
+
+  goals: 1, // цель на сайте
+
+  humanQualities: [], // что для тебя важно
+
+  badHabits: [], // прохие привычки
+
+  bestDate: null,// лучшая свиданка
+
+  zodiacSign: null, // знак зодика
+
+  orientation: null, // гетеро гомо ...
+
+  hobby: [], // хобби
+
   about: '' // что то о себе
 }
 

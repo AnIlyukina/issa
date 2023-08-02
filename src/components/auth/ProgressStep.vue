@@ -1,28 +1,15 @@
 <script setup>
 
 defineProps({
+  steps: {
+    type: Array,
+    required: true,
+  },
   currentStep: {
-    type: Number,
-    requared: true
+    type: String,
+    required: true,
   }
 })
-
-const steps = [
-  {
-    id: 1,
-    name: 'Знакомимся'
-  },
-  {
-    id: 2,
-    name: 'Заполнение анкеты'
-  },
-  {
-    id: 3,
-    name: 'Загрузка фото'
-  },
-
-]
-
 
 </script>
 
@@ -31,7 +18,7 @@ const steps = [
     <li
       v-for="step in steps"
       class="progress-step__item"
-      :class="[currentStep === step.id ? 'current-item' : '']"
+      :class="[currentStep === step.status ? 'current-item' : '']"
     >
       <span class="progress-count">{{ step.id }}</span>
       <span class="progress-label">{{ step.name}}</span>
@@ -47,7 +34,7 @@ const steps = [
   display: flex;
   padding: 20px 10px;
   position: relative;
-  z-index:10px;
+  z-index:10;
   width: 100%;
 }
 
@@ -134,7 +121,7 @@ const steps = [
   height:10px;
   width:10px;
 }
-ß
+
 .current-item ~ .progress-step__item .progress-label{
   opacity: 0.5;
 }

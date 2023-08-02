@@ -3,30 +3,59 @@ import AuthForm from "../auth/AuthForm.vue";
 
 import ProgressStep from "../auth/ProgressStep.vue";
 
-import FirstStep from '../auth/FirstStep.vue'
-import SecondStep from '../auth/FirstStep.vue'
-import ThirdStep from '../auth/FirstStep.vue'
+import RegisterStep from "../auth/RegisterStep.vue"
+import FillProfileStep from "../auth/FillProfileStep.vue"
+import LoadPhotoStep from "../auth/LoadPhotoStep.vue"
 
-import { ref } from "vue";
+import { useAuthStore} from '../../stores/auth';
+import {storeToRefs} from 'pinia';
 
+const store = useAuthStore()
 
-const currentAuthStep = ref(1);
+const { authStatus } = storeToRefs(store)
 
+const steps = [
+  {
+    id: 1,
+    status: 'registration',
+    formName: 'Регистрация',
+    name: 'Знакомимся',
+  },
+  {
+    id: 2,
+    status: 'fillProfile',
+    formName: 'Мы хотим знать о тебе чуть больше...',
+    name: 'Заполнение анкеты',
+  },
+  {
+    id: 3,
+    status: 'loadPhoto',
+    formName: 'Прикрепи свои фото',
+    name: 'Загрузка фото',
+  },
+]
+
+const getName = () => {
+  return steps.find(step => step.status === authStatus.value).formName
+}
 
 </script>
 
 <template>
 
-  <progress-step :current-step="currentAuthStep" />
-  <auth-form :form-name="'Регистрация'" @submit-form="signUp"> 
-    <first-step
-      v-if="currentAuthStep === 1"
+  <progress-step
+    :steps='steps'
+    :current-step="authStatus"
+  />
+  <auth-form :form-name="getName()">
+    <register-step
+      v-if="authStatus === 'registration'"
     />
-    <second-step
-      v-if="currentAuthStep === 2"
+    <fill-profile-step
+      v-if="authStatus === 'fillProfile'"
     />
-    <third-step
-      v-if="currentAuthStep === 3"
+    <load-photo-step
+      v-if="authStatus === 'loadPhoto'"
     />
   </auth-form>
 </template>

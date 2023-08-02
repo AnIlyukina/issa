@@ -1,5 +1,5 @@
 <script setup>
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits(['update:modelValue']);
 
 defineProps({
    modelValue: {
@@ -8,7 +8,7 @@ defineProps({
   },
   label: {
     type: String,
-    required: true
+    default: null
   },
   type: {
     type: String,
@@ -27,6 +27,7 @@ defineProps({
 const changeValue = (event) => {
   emits('update:modelValue', event.target.value)
 }
+
 </script>
 
 <template>
@@ -76,7 +77,7 @@ const changeValue = (event) => {
   </div>
 </template>
 
-<style>
+<style scoped >
 .input-box label {
   transition: top .5s;
 }
@@ -93,5 +94,11 @@ const changeValue = (event) => {
 .input-box input:valid~label,
 .input-box input:-webkit-autofill~label {
   top: -5px;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
 }
 </style>
