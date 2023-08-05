@@ -1,6 +1,6 @@
 <script setup>
 import UIInput from '../UI/UIinput.vue';
-import SelectGender from '../SelectGender.vue';
+import SelectGender from './SelectGender.vue';
 
 const emits = defineEmits(['update:name', 'update:city', 'update:gender', 'update:genderLooking']);
 

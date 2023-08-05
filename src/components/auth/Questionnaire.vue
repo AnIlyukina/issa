@@ -1,7 +1,7 @@
 <script setup>
 import AuthForm from './AuthForm.vue';
 import UIInput from '../UI/UIinput.vue';
-import SelectGender from '../SelectGender.vue';
+import SelectGender from '../common/SelectGender.vue';
 import {reactive} from 'vue';
 
 

@@ -17,7 +17,7 @@ const initialStateProfile = {
   gender: [], // пол
   genderLooking: [], // пол который ищу
 
-  goals: null, // цель на сайте
+  goal: [], // цель на сайте
 
   humanQualities: [], // что для тебя важно
 
@@ -39,12 +39,12 @@ const fillProfileSteps = [
   {
     name: 'main',
     required: true,
-    component: MainProfileInfo
+    component: MainProfileInfo,
   },
   {
     name: 'goals',
     required: false,
-    component: Goals
+    component: Goals,
   },
   {
     name: 'humanQualities',
@@ -102,6 +102,11 @@ const changeValueGenderLooking = (value) => {
   stateProfile.genderLooking = value
 }
 
+const changeValueGoal = (value) => {
+  console.log(value);
+  stateProfile.goal = value
+}
+
 const nextStep = (index) => {
   //TODO дописать условие на обязательные параметры
   // if (fillProfileSteps[index].required) {
@@ -129,9 +134,10 @@ const  skipStep = (index, stepName) => {
       @update:name="changeValueUser"
       @update:city="changeValueCity"
       @update:gender="changeValueGender"
+      @update:goal="changeValueGoal"
       @update:genderLooking="changeValueGenderLooking"
     >
-      <div class="flex justify-between mt-3">
+      <div class="flex justify-between mt-10">
         <div>
           <a
             v-if="!step.required" class="p-1 border-b dark:border-white cursor-pointer"

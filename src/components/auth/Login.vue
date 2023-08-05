@@ -1,5 +1,5 @@
 <script setup>
-import UIInput from "../UI/UIinput.vue";
+import UIInput from "../UI/UIInput.vue";
 import UIAuthButton from "../UI/UIAuthButton.vue";
 import AuthForm from "../auth/AuthForm.vue";
 
