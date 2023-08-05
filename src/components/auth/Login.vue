@@ -67,14 +67,14 @@ const signIn = async () => {
 
   try {
     await store.login(stateForm);
-    router.push({ name: "Main" });
+    // router.push({ name: "Main" });
   } catch (err) {
     console.log(err);
   }
 };
 </script>
 <template>
-  <auth-form :form-name="'Войти'" @submit-form="signIn">
+  <auth-form :form-name="'Войти'" @submit.prevent="signIn">
     <u-i-input
       v-model="stateForm.username"
       :type="'text'"

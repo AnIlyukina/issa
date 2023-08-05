@@ -1,5 +1,5 @@
 <script setup>
-import moment from 'moment';
+import moment from "moment";
 
 import UIInput from "../UI/UIinput.vue";
 import UIAuthButton from "../UI/UIAuthButton.vue";
@@ -11,13 +11,13 @@ import { useAuthStore } from "/src/stores/auth";
 const initialStateFrom = {
   email: "",
   password: "",
-  birthday: "",
+  birthDate: "",
   isAgreed: false,
 };
 const initialStateError = {
   email: "",
   password: "",
-  birthday: "",
+  birthDate: "",
   isAgreed: "",
 };
 
@@ -64,7 +64,7 @@ const checkValidForm = () => {
         }
       }
     }
-    if (key === "birthday") {
+    if (key === "birthDate") {
       if (!stateForm[key]) {
         stateError[key] = "Заполни дату рождения";
         errors = true;
@@ -77,19 +77,19 @@ const checkValidForm = () => {
 };
 
 const signUp = async () => {
-  // TODO расскоментировать
   // const errors = checkValidForm();
   // if (errors) {
   //   return;
   // }
-  console.log(stateForm, 'signUp');
   try {
-    await store.register(stateForm);
+    await store.register({
+      ...stateForm,
+      birthDate: moment(stateForm.birthDate).format("DD.MM.YYYY"),
+    });
   } catch (err) {
     console.log(err);
   }
 };
-
 </script>
 
 <template>
@@ -108,10 +108,10 @@ const signUp = async () => {
     :error="stateError.password"
   />
   <u-i-input
-    v-model="stateForm.birthday"
+    v-model="stateForm.birthDate"
     :type="'date'"
     :icon-name="'fa-solid fa-cake-candles'"
-    :error="stateError.birthday"
+    :error="stateError.birthDate"
   />
   <div class="dark:text-white">
     <label for="" class="mr-[3px]">
@@ -129,7 +129,11 @@ const signUp = async () => {
     </span>
   </div>
 
-  <u-i-auth-button :type="'submit'" :name="'Зарегистрироваться'" @click.prevent="signUp" />
+  <u-i-auth-button
+    :type="'submit'"
+    :name="'Зарегистрироваться'"
+    @click.prevent="signUp"
+  />
 
   <div class="text-center mt-[25px] w-[100%] text-[.9em] dark:text-white">
     <p>

@@ -1,6 +1,7 @@
 <template>
   <div class="card ball-bouncing">
-    <div class="ball"></div><span class="logo-text">pen heart</span>
+    <div class="ball"></div>
+    <span class="logo-text">pen heart</span>
   </div>
 </template>
 
@@ -11,23 +12,24 @@
   left: 1em;
 }
 
-.logo-text {  position: absolute;
-  color:#FFF;
-  width:fit-content;
+.logo-text {
+  position: absolute;
+  color: #fff;
+  width: fit-content;
   font-weight: 600;
   left: 55px;
   bottom: 25px;
 }
 
 .ball {
-  background-color: #FFF;
+  background-color: #fff;
   border-radius: 50%;
   height: 3rem;
   position: absolute;
   width: 3rem;
 }
 .ball-bouncing {
-  background-color: #FFF;
+  background-color: #fff;
 }
 
 .ball-bouncing::before {
@@ -35,14 +37,14 @@
   animation-iteration-count: 3;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 1rem;
-  content: '';
+  content: "";
   height: 0.15rem;
   width: 2rem;
 }
 
 .ball-bouncing .ball {
   animation: ballBouncing 1.2s ease-in infinite;
-    animation-iteration-count: 3;
+  animation-iteration-count: 3;
   bottom: 2.1rem;
   transform-origin: bottom;
 }

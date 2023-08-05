@@ -1,5 +1,4 @@
 <script setup>
-
 defineProps({
   steps: {
     type: Array,
@@ -8,9 +7,8 @@ defineProps({
   currentStep: {
     type: String,
     required: true,
-  }
-})
-
+  },
+});
 </script>
 
 <template>
@@ -21,25 +19,25 @@ defineProps({
       :class="[currentStep === step.status ? 'current-item' : '']"
     >
       <span class="progress-count">{{ step.id }}</span>
-      <span class="progress-label">{{ step.name}}</span>
+      <span class="progress-label">{{ step.name }}</span>
     </li>
   </ul>
 </template>
 
 <style scoped>
 .progress-steps__list {
-  box-shadow: 0 15px 25px rgba(0,0,0,0,1);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0, 1);
   color: #333;
   border-radius: 10px;
   display: flex;
   padding: 20px 10px;
   position: relative;
-  z-index:10;
+  z-index: 10;
   width: 100%;
 }
 
-.progress-step__item{
-  color:white;
+.progress-step__item {
+  color: white;
   padding: 0 20px;
   flex-basis: 0;
   -webkit-box-flex: 1;
@@ -54,7 +52,7 @@ defineProps({
 }
 
 .progress-step__item + .progress-step__item:after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 19px;
@@ -68,9 +66,9 @@ defineProps({
   height: 40px;
   width: 40px;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
-  border-radius:50%;
+  border-radius: 50%;
   font-weight: 600;
   margin: 0 auto;
   position: relative;
@@ -79,22 +77,22 @@ defineProps({
 }
 
 .progress-count:before {
-  content: '';
+  content: "";
   height: 10px;
   width: 20px;
   background: #ffb8fe;
   border-left: 3px solid #fff;
   border-bottom: 3px solid #fff;
   position: absolute;
-  left:50%;
-  top:50%;
+  left: 50%;
+  top: 50%;
   transform: translate(-50%, -60%) rotate(-45deg);
   transform-origin: center center;
   z-index: 2;
 }
 
 .progress-count:after {
-  content: '';
+  content: "";
   height: 40px;
   width: 40px;
   background-color: #ffb8fe;
@@ -113,25 +111,24 @@ defineProps({
 }
 
 .current-item .progress-count:before,
-.current-item ~ .progress-step__item .progress-count:before{
+.current-item ~ .progress-step__item .progress-count:before {
   display: none;
 }
 
-.current-item ~ .progress-step__item .progress-count:after{
-  height:10px;
-  width:10px;
+.current-item ~ .progress-step__item .progress-count:after {
+  height: 10px;
+  width: 10px;
 }
 
-.current-item ~ .progress-step__item .progress-label{
+.current-item ~ .progress-step__item .progress-label {
   opacity: 0.5;
 }
 
-.current-item .progress-count:after{
-    background: transparent;
-    border: 2px solid #ffb8fe;
+.current-item .progress-count:after {
+  background: transparent;
+  border: 2px solid #ffb8fe;
 }
-.current-item .progress-count{
-    color: #ffb8fe;
+.current-item .progress-count {
+  color: #ffb8fe;
 }
-
 </style>

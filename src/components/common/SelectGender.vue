@@ -1,74 +1,87 @@
 <script setup>
-const emits = defineEmits(['update:modelValue'])
+const emits = defineEmits(["update:modelValue"]);
 
-import { toRefs } from 'vue';
+import { toRefs } from "vue";
 
 const props = defineProps({
   modelValue: {
     type: Array,
-    default: []
+    default: [],
+  },
+  genderList: {
+    type: Array,
+    required: true,
   },
   label: {
     type: String,
-    default: ''
+    default: "",
   },
   multi: {
     type: Boolean,
-    default: false
-  }
-})
-
-const { multi, modelValue } = toRefs(props)
-
-const genders = [
-  {
-    id: 1,
-    name: 'female',
-    color: 'bg-pink-400',
-    icon: 'fa-solid fa-venus'
+    default: false,
   },
-  {
-    id: 2,
-    name: 'male',
-    color: 'bg-blue-300',
-    icon: 'fa-solid fa-mars'
-  },
-  {
-    id: 3,
-    name: 'others',
-    color: 'bg-gray-400',
-    icon: 'fa-solid fa-transgender'
-  }
-]
+});
 
+const { multi, modelValue } = toRefs(props);
 
 const selectGender = (gender) => {
-  let result = []
-  const index = isSelected(gender.id)
+  let result = [];
+  const index = isSelected(gender.id);
 
   if (!multi.value) {
-    result = []
+    result = [];
 
     if (index === -1) {
-      result.push(gender.id)
+      result.push(gender.id);
     }
   } else {
-    result = [...modelValue.value]
+    result = [...modelValue.value];
     if (index !== -1) {
-      result.splice(index, 1)
+      result.splice(index, 1);
     } else {
-      result.push(gender.id)
+      result.push(gender.id);
     }
   }
-  emits('update:modelValue', result)
-}
+  emits("update:modelValue", result);
+};
 
 const isSelected = (id) => {
-  return modelValue.value.findIndex(value => value === id)
-}
+  return modelValue.value.findIndex((value) => value === id);
+};
 
+const getColor = (gender) => {
+  let result = "border border-1 border-black dark:border-white";
+  if (isSelected(gender.id) > -1) {
+    switch (gender.type) {
+      case "female":
+        result = "bg-pink-400";
+        break;
+      case "male":
+        result = "bg-blue-300";
+        break;
+      case "transgender":
+        result = "bg-gray-400";
+        break;
+    }
+  }
+  return result;
+};
 
-
+const getIconName = (type) => {
+  let result = "";
+  switch (type) {
+    case "female":
+      result = "fa-solid fa-venus";
+      break;
+    case "male":
+      result = "fa-solid fa-mars";
+      break;
+    case "transgender":
+      result = "fa-solid fa-transgender";
+      break;
+  }
+  return result;
+};
 </script>
 
 <template>
@@ -78,27 +91,19 @@ const isSelected = (id) => {
     </h3>
     <ul class="flex h-[70px] justify-around items-center">
       <li
-        v-for="gender in genders"
-        class="
-          w-[40px] h-[40px]
-          rounded-2xl cursor-pointer
-          flex items-center justify-center
-        "
-        :class="isSelected(gender.id) === -1 ? 'border border-1 border-black dark:border-white' : `${gender.color}`"
+        v-for="gender in genderList"
+        class="w-[40px] h-[40px] rounded-2xl cursor-pointer flex items-center justify-center"
+        :class="getColor(gender)"
         @click="selectGender(gender)"
       >
-         <span
-           v-if="gender.icon"
-         >
-          <font-awesome-icon size="lg" :icon="gender.icon" class="icon dark:text-white"/>
-        </span>
-
+        <font-awesome-icon
+          size="lg"
+          :icon="getIconName(gender.type)"
+          class="icon dark:text-white"
+        />
       </li>
     </ul>
   </div>
 </template>
 
-<style scoped>
-
-</style>
-
+<style scoped></style>

@@ -6,12 +6,12 @@ import MainLayouts from '../src/layouts/MainLayouts.vue';
 import { useAuthStore } from '../src/stores/auth';
 import { storeToRefs } from 'pinia'
 
+
 const store = useAuthStore();
 
 const { isAuth } = storeToRefs(store)
 
-const currentLayouts = computed(() => isAuth.value ? MainLayouts : AuthLayouts)
-
+const currentLayouts = computed(() => false ? MainLayouts : AuthLayouts)
 </script>
 
 <template>

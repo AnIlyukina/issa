@@ -2,35 +2,46 @@ import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import api from "../api/api.js";
 
+export const useAuthStore = defineStore("auth", () => {
+  const isAuth = computed(() => localStorage.getItem("token"));
 
-export const useAuthStore = defineStore('auth', () => {
-  const isAuth = computed(() => localStorage.getItem('token'))
-
-  const authStatus = ref('registration');
+  const authStatus = ref("registration");
 
   const register = (stateForm) => {
-    return new Promise (async (resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
       try {
-        // TODO расскоментировать
         // const response = await api.post("/registration", stateForm);
         // setToken(response.data)
-        authStatus.value = 'fillProfile'
+        authStatus.value = "fillProfile";
 
-        resolve(true)
+        resolve(true);
       } catch (error) {
-        reject(error)
+        reject(error);
       }
-    })
-  }
+    });
+  };
 
   const login = (stateForm) => {
     return new Promise(async (resolve, reject) => {
       try {
         const response = await api.post("/login", stateForm);
 
-        setToken(response.data)
+        setToken(response.data);
 
         resolve(true);
+      } catch (error) {
+        reject(error.response.data?.message);
+      }
+    });
+  };
+
+  const saveProfile = (stateProfile) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        console.log(stateProfile, "stateProfile");
+        //const response = await api.post('/save-profile', stateProfile)
+
+        authStatus.value = "loadPhoto";
       } catch (error) {
         reject(error.response.data?.message);
       }
@@ -42,7 +53,7 @@ export const useAuthStore = defineStore('auth', () => {
       try {
         const response = await api.post("/refresh");
 
-        setToken(response.data)
+        setToken(response.data);
 
         resolve(true);
       } catch (error) {
@@ -54,28 +65,23 @@ export const useAuthStore = defineStore('auth', () => {
   const logout = () => {
     return new Promise(async (resolve, reject) => {
       try {
-
         await api.post("/logout");
-        removeToken()
-
+        removeToken();
       } catch (error) {
         reject(e.response.data?.message);
       }
     });
   };
 
-
-  const setToken = ({token, refresh_token}) => {
-    localStorage.setItem('token', token)
-    localStorage.setItem('refresh_token', refresh_token)
-  }
+  const setToken = ({ token, refresh_token }) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("refresh_token", refresh_token);
+  };
 
   const removeToken = () => {
-    localStorage.removeItem('token')
-    localStorage.removeItem('refresh_token')
-  }
-
-
+    localStorage.removeItem("token");
+    localStorage.removeItem("refresh_token");
+  };
 
   return {
     authStatus,
@@ -84,5 +90,6 @@ export const useAuthStore = defineStore('auth', () => {
     login,
     refreshToken,
     logout,
+    saveProfile,
   };
-})
+});

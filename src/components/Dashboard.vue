@@ -1,10 +1,5 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-  <div>
-    Дашбоард
-  </div>
-
+  <div>Дашбоaрд</div>
 </template>

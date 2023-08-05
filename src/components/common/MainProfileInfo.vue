@@ -1,36 +1,35 @@
 <script setup>
-import UIInput from '../UI/UIinput.vue';
-import SelectGender from './SelectGender.vue';
+import UIInput from "../UI/UIinput.vue";
+import SelectGender from "./SelectGender.vue";
 
-const emits = defineEmits(['update:name', 'update:city', 'update:gender', 'update:genderLooking']);
+const emits = defineEmits(["update:values"]);
 
 defineProps({
+  profileData: {
+    type: Object,
+    required: true,
+  },
   stateProfile: {
     type: Object,
-    required: true
-  }
-})
-// const submitMainInfo = () => {
-//   console.log('submit')
-//   emits('update:mainInfo', mainInfo)
-// }
+    required: true,
+  },
+});
 
-const changeValueUser = (value) => {
-  emits('update:name', value)
-}
+const changeValueName = (value) => {
+  emits("update:values", { prop: "name", value });
+};
 
 const changeValueCity = (value) => {
-  emits('update:city', value)
-}
+  emits("update:values", { prop: "city", value });
+};
 
 const changeValueGender = (value) => {
-  emits('update:gender', value)
-}
+  emits("update:values", { prop: "gender", value });
+};
 
 const changeValueGenderLooking = (value) => {
-  emits('update:genderLooking', value)
-}
-
+  emits("update:values", { prop: "genderLooking", value });
+};
 </script>
 
 <template>
@@ -39,7 +38,7 @@ const changeValueGenderLooking = (value) => {
       v-model="stateProfile.name"
       :type="'text'"
       :label="'Ваше имя'"
-      @update:modelValue="changeValueUser"
+      @update:modelValue="changeValueName"
     />
     <u-i-input
       v-model="stateProfile.city"
@@ -49,12 +48,14 @@ const changeValueGenderLooking = (value) => {
     />
     <select-gender
       v-model="stateProfile.gender"
+      :gender-list="profileData.genderList"
       :label="'Выбере ваш пол:'"
       @update:modelValue="changeValueGender"
     />
     <select-gender
       v-model="stateProfile.genderLooking"
       :multi="true"
+      :gender-list="profileData.genderList"
       :label="'Кто вам интересен:'"
       @update:modelValue="changeValueGenderLooking"
     />
@@ -62,6 +63,4 @@ const changeValueGenderLooking = (value) => {
   </ul>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

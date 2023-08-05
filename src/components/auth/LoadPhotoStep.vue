@@ -1,9 +1,5 @@
-<script setup>
-
-</script>
+<script setup></script>
 
 <template>
-  <div>
-    3
-  </div>
+  <div>Грузим картинки</div>
 </template>
