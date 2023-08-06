@@ -2,6 +2,8 @@
 import UIInput from "../UI/UIinput.vue";
 import SelectGender from "./SelectGender.vue";
 
+import Multiselect from '@vueform/multiselect'
+
 const emits = defineEmits(["update:values"]);
 
 defineProps({
@@ -40,11 +42,9 @@ const changeValueGenderLooking = (value) => {
       :label="'Ваше имя'"
       @update:modelValue="changeValueName"
     />
-    <u-i-input
+    <Multiselect
       v-model="stateProfile.city"
-      :type="'text'"
-      :label="'Где вы находитесь?'"
-      @update:modelValue="changeValueCity"
+      :options="profileData.cityList"
     />
     <select-gender
       v-model="stateProfile.gender"
@@ -63,4 +63,4 @@ const changeValueGenderLooking = (value) => {
   </ul>
 </template>
 
-<style scoped></style>
+<style src="@vueform/multiselect/themes/default.css"></style>

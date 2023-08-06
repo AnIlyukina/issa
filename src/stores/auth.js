@@ -51,7 +51,9 @@ export const useAuthStore = defineStore("auth", () => {
   const refreshToken = () => {
     return new Promise(async (resolve, reject) => {
       try {
-        const response = await api.post("/refresh");
+        const response = await api.post("/token/refresh", {
+          refresh_token: localStorage.getItem("refresh_token"),
+        });
 
         setToken(response.data);
 

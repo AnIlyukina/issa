@@ -1,4 +1,6 @@
 import axios from "axios";
+import { useAuthStore } from "../stores/auth.js";
+import { useRouter } from "vue-router";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_API_DOMAIN,
@@ -10,10 +12,30 @@ const api = axios.create({
 
 
 api.interceptors.request.use((config) => {
+  console.log(config, 'config')
   if (config.url !== "/login" && config.url !== "/registration") {
     config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
   }
-    return config;
+  return config;
 })
 
+api.interceptors.response.use(
+  (response) => {
+    console.log(response, "response");
+  },
+  (error) => {
+    console.log(error);
+    if (error.response.status === 401) {
+      if (localStorage.getItem("refresh_token")) {
+        const store = useAuthStore();
+        store.refreshToken();
+      }
+    } else {
+      const router = useRouter();
+      router.push({
+        name: "Login",
+      });
+    }
+  }
+);
 export default api
