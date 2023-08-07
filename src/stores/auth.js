@@ -24,8 +24,9 @@ export const useAuthStore = defineStore("auth", () => {
   const login = (stateForm) => {
     return new Promise(async (resolve, reject) => {
       try {
+        console.log(stateForm, "stateForm");
         const response = await api.post("/login", stateForm);
-
+        console.log(response, "response");
         setToken(response.data);
 
         resolve(true);

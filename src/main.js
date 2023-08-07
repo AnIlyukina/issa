@@ -1,6 +1,9 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 
+import vSelect from "vue-select";
+import "vue-select/dist/vue-select.css";
+
 import App from "../apps/Main.vue";
 import router from "./router/main.js";
 
@@ -39,6 +42,7 @@ library.add(
 );
 
 const app = createApp(App);
+app.component("v-select", vSelect);
 const pinia = createPinia();
 
 app.component("font-awesome-icon", FontAwesomeIcon);

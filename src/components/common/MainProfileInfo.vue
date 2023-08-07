@@ -2,8 +2,6 @@
 import UIInput from "../UI/UIinput.vue";
 import SelectGender from "./SelectGender.vue";
 
-import Multiselect from '@vueform/multiselect'
-
 const emits = defineEmits(["update:values"]);
 
 defineProps({
@@ -21,8 +19,8 @@ const changeValueName = (value) => {
   emits("update:values", { prop: "name", value });
 };
 
-const changeValueCity = (value) => {
-  emits("update:values", { prop: "city", value });
+const changeValueCity = (selected) => {
+  emits("update:values", { prop: "city", value: selected.id });
 };
 
 const changeValueGender = (value) => {
@@ -32,6 +30,10 @@ const changeValueGender = (value) => {
 const changeValueGenderLooking = (value) => {
   emits("update:values", { prop: "genderLooking", value });
 };
+
+const fetchOptions = (value) => {
+  console.log(value, 'fetchOptions')
+}
 </script>
 
 <template>
@@ -42,10 +44,21 @@ const changeValueGenderLooking = (value) => {
       :label="'Ваше имя'"
       @update:modelValue="changeValueName"
     />
-    <Multiselect
-      v-model="stateProfile.city"
-      :options="profileData.cityList"
-    />
+    <v-select
+      class="select-city"
+      placeholder="Введите ваш город"
+      :options='profileData.cityList'
+      label="name" :filterable="false" 
+      @search="fetchOptions"
+      @option:selected="changeValueCity"
+    >
+      <template #no-options="{ search, searching, loading } ">
+        Введите ваш город для поиска
+      </template>
+      <template #option="{ name }">
+        {{ name }}
+      </template>
+    </v-select>
     <select-gender
       v-model="stateProfile.gender"
       :gender-list="profileData.genderList"
@@ -63,4 +76,23 @@ const changeValueGenderLooking = (value) => {
   </ul>
 </template>
 
-<style src="@vueform/multiselect/themes/default.css"></style>
+<style>
+.select-city{
+  margin-bottom: 30px;
+  --vs-controls-color: rgb(0, 0, 0);
+  --vs-border-color: rgb(0, 0, 0);
+
+  --vs-dropdown-bg: #282c34;
+  --vs-dropdown-color: #cc99cd;
+  --vs-dropdown-option-color: #cc99cd;
+
+  --vs-selected-bg: #664cc3;
+  --vs-selected-color: rgb(0, 0, 0);;
+
+  --vs-search-input-color: rgb(0, 0, 0);
+
+  --vs-dropdown-option--active-bg: #664cc3;
+  --vs-dropdown-option--active-color: #eeeeee;
+}
+
+</style>
