@@ -85,16 +85,27 @@ const getCity = debounce (async (loading, search, vm) =>
 .search-select{
   margin-bottom: 30px;
 
+<<<<<<< HEAD
   --vs-dropdown-bg: transperent;
 
+=======
+  --vs-dropdown-bg: rgb(134, 132, 132);
+  
+>>>>>>> de6c841 (cropper for image)
   /* --vs-dropdown-color: #000000;
   --vs-dropdown-option-color: #000000; */
 
   --vs-selected-bg: #664cc3;
   border-bottom: 2px solid white;
+<<<<<<< HEAD
   /* --vs-selected-color: rgb(0, 0, 0);; */
 /*
   --vs-search-input-color: rgb(0, 0, 0); */
+=======
+  --vs-selected-color: white;
+
+  /* --vs-search-input-color: rgb(0, 0, 0);  */
+>>>>>>> de6c841 (cropper for image)
 
   --vs-border-color: none;
   --vs-dropdown-option--active-bg: rgb(173, 162, 162);
