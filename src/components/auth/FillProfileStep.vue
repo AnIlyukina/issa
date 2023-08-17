@@ -22,7 +22,7 @@ const getBestDate = api.get("/best-date");
 const getHobby = api.get("/hobby");
 const getZodiacSign = api.get("/zodiac-sign");
 const getOrientation = api.get("/orientation");
-const getBadHabbit = api.get("/bad-habbit");
+const getBadHabit = api.get("/bad-habbit");
 
 let profileData = ref({});
 const isLoading = ref(true);
@@ -38,7 +38,7 @@ Promise.all([
   getHobby,
   getZodiacSign,
   getOrientation,
-  getBadHabbit,
+  getBadHabit,
 ]).then((values) => {
   profileData.value.cityList = values[0].data;
   profileData.value.genderList = values[1].data;
@@ -48,14 +48,14 @@ Promise.all([
   profileData.value.hobbyList = values[5].data;
   profileData.value.zodiacSignList = values[6].data;
   profileData.value.orientationList = values[7].data;
-  profileData.value.badHabbitList = values[8].data;
+  profileData.value.badHabitList = values[8].data;
 
   isLoading.value = false;
 });
 
 const initialStateProfile = {
   name: "", // имя отображаемое в профиле
-  city: "", // локация пользователя
+  city: null, // локация пользователя
   gender: [], // пол
   genderLooking: [], // пол который ищу
 
@@ -69,7 +69,7 @@ const initialStateProfile = {
 
   zodiacSign: [], // знак зодика
 
-  badHabbit: [], // прохие привычки
+  badHabit: [], // прохие привычки
 
   hobby: [], // хобби
 
@@ -156,7 +156,6 @@ const previousStep = (index) => {
 
 <template>
   <div
-    v-if="!isLoading"
     v-for="(step, index) in fillProfileSteps"
     class="dark:text-white"
   >

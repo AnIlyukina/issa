@@ -1,0 +1,86 @@
+<script setup>
+import {ref, toRefs} from 'vue';
+
+import debounce from 'lodash.debounce'
+
+import api from '../../api/api';
+const emits = defineEmits(["update:modelValue"]);
+
+const props = defineProps({
+  modelValue: {
+    type: Number,
+    default: null
+  },
+  apiUrl: {
+    type: String,
+    required: true,
+  }
+})
+
+const { apiUrl } = toRefs(props)
+
+const options = ref([])
+
+const onSearch = (search, loading) => {
+  if (search.length) {
+    loading(true)
+    getCity(loading, search)
+  }
+}
+
+const changeValue = (selected) => {
+  emits('update:modelValue', selected)
+}
+
+const getCity = debounce ((loading, search, vm) =>
+  {
+    try {
+      const response = api.get(apiUrl.value + search)
+      options.value = response.data
+    } catch (e) {
+      console.log(e)
+    } finally {
+      loading(false)
+    }
+  }, 500)
+
+</script>
+
+<template>
+  <v-select
+    :value="modelValue"
+    :options='options'
+    class="search-select"
+    label="name"
+    placeholder="Введите ваш город"
+    @search="onSearch"
+    @option:selected="changeValue"
+  >
+    <template #no-options="{ search, searching, loading } ">
+      <div>
+        Результатов нет
+      </div>
+    </template>
+    <template #option="{ name }">
+      {{ name }}
+    </template>
+  </v-select>
+</template>
+
+<style>
+.search-select{
+  margin-bottom: 30px;
+
+  --vs-dropdown-bg: transperent;
+  --vs-dropdown-color: #000000;
+  --vs-dropdown-option-color: #000000;
+
+  --vs-selected-bg: #664cc3;
+  --vs-selected-color: rgb(0, 0, 0);;
+
+  --vs-search-input-color: rgb(0, 0, 0);
+
+  --vs-dropdown-option--active-bg: #664cc3;
+  --vs-dropdown-option--active-color: #eeeeee;
+}
+</style>

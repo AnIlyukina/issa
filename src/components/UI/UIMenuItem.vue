@@ -30,7 +30,7 @@ defineProps({
       <div v-else>
         <div class="flex justify-center items-center">
           <img
-            class="relative w-[50px] h-[50px] rounded-[50%]"
+            class="relative w-[50px] h-[50px] rounded-full"
             src="../../../src/assets/images/avatar.jpeg"
           />
           <span class="pl-2">Анна Илюкина</span>
