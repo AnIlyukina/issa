@@ -72,15 +72,23 @@ const getCity = debounce ((loading, search, vm) =>
   margin-bottom: 30px;
 
   --vs-dropdown-bg: transperent;
-  --vs-dropdown-color: #000000;
-  --vs-dropdown-option-color: #000000;
+  
+  /* --vs-dropdown-color: #000000;
+  --vs-dropdown-option-color: #000000; */
 
   --vs-selected-bg: #664cc3;
-  --vs-selected-color: rgb(0, 0, 0);;
+  border-bottom: 2px solid white;
+  /* --vs-selected-color: rgb(0, 0, 0);; */
+/* 
+  --vs-search-input-color: rgb(0, 0, 0); */
 
-  --vs-search-input-color: rgb(0, 0, 0);
-
+  --vs-border-color: none;
   --vs-dropdown-option--active-bg: #664cc3;
   --vs-dropdown-option--active-color: #eeeeee;
+}
+
+.vs__selected-options input,
+.vs__selected-options input:focus{
+  padding: 5px;
 }
 </style>

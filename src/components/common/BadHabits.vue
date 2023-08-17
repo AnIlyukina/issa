@@ -21,9 +21,9 @@ const changeBadHabbit = (value) => {
 
 <template>
   <ul>
-    <h3 class="dark:text-white">Твоя ориентация?</h3>
+    <h3 class="dark:text-white">У тебя есть вредные привычки?</h3>
     <u-i-list
-      :list="profileData.badHabbitList"
+      :list="profileData.badHabitList"
       :state="stateProfile.badHabbit"
       @update:state="changeBadHabbit"
     />
