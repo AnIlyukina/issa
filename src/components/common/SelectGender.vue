@@ -20,6 +20,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  error: {
+    type: String,
+    default: "",
+  }
 });
 
 const { multi, modelValue } = toRefs(props);
@@ -103,6 +107,14 @@ const getIconName = (type) => {
         />
       </li>
     </ul>
+    <div class="h-[20px]">
+      <span
+        v-show="error"
+        class="block font-bold text-[13px] text-red-500 text-center"
+      >
+        {{ error }}
+      </span>
+      </div>
   </div>
 </template>
 

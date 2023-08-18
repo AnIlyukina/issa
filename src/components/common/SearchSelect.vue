@@ -14,6 +14,10 @@ const props = defineProps({
   apiUrl: {
     type: String,
     required: true,
+  },
+  error: {
+    type: String,
+    default: "",
   }
 })
 
@@ -47,24 +51,34 @@ const getCity = debounce ((loading, search, vm) =>
 </script>
 
 <template>
-  <v-select
-    :value="modelValue"
-    :options='options'
-    class="search-select"
-    label="name"
-    placeholder="Введите ваш город"
-    @search="onSearch"
-    @option:selected="changeValue"
-  >
-    <template #no-options="{ search, searching, loading } ">
-      <div>
-        Результатов нет
+  <div class="relative">
+    <v-select
+      :value="modelValue"
+      :options='options'
+      class="search-select"
+      label="name"
+      placeholder="Введите ваш город"
+      @search="onSearch"
+      @option:selected="changeValue"
+    >
+      <template #no-options="{ search, searching, loading } ">
+        <div>
+          Результатов нет
+        </div>
+      </template>
+      <template #option="{ name }">
+        {{ name }}
+      </template>
+    </v-select>
+    <div class="absolute w-[100%] top-[45px]">
+      <span
+        v-show="error"
+        class="block font-bold text-[13px] text-red-500 text-center"
+      >
+        {{ error }}
+      </span>
       </div>
-    </template>
-    <template #option="{ name }">
-      {{ name }}
-    </template>
-  </v-select>
+  </div>
 </template>
 
 <style>
@@ -72,14 +86,14 @@ const getCity = debounce ((loading, search, vm) =>
   margin-bottom: 30px;
 
   --vs-dropdown-bg: transperent;
-  
+
   /* --vs-dropdown-color: #000000;
   --vs-dropdown-option-color: #000000; */
 
   --vs-selected-bg: #664cc3;
   border-bottom: 2px solid white;
   /* --vs-selected-color: rgb(0, 0, 0);; */
-/* 
+/*
   --vs-search-input-color: rgb(0, 0, 0); */
 
   --vs-border-color: none;

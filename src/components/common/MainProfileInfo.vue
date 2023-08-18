@@ -10,6 +10,10 @@ defineProps({
     type: Object,
     required: true,
   },
+  stateError: {
+    type: Object,
+    required: true,
+  },
   stateProfile: {
     type: Object,
     required: true,
@@ -40,17 +44,20 @@ const changeValueGenderLooking = (value) => {
       v-model="stateProfile.name"
       :type="'text'"
       :label="'Ваше имя'"
+      :error="stateError.name"
       @update:modelValue="changeValueName"
     />
     <search-select
       v-model="stateProfile.city"
       api-url="'/city?city='"
+      :error="stateError.city"
       @update:modelValue="changeValueCity"
     />
     <select-gender
       v-model="stateProfile.gender"
       :gender-list="profileData.genderList"
       :label="'Выбере ваш пол:'"
+      :error="stateError.gender"
       @update:modelValue="changeValueGender"
     />
     <select-gender
@@ -58,6 +65,7 @@ const changeValueGenderLooking = (value) => {
       :multi="true"
       :gender-list="profileData.genderList"
       :label="'Кто вам интересен:'"
+      :error="stateError.genderLooking"
       @update:modelValue="changeValueGenderLooking"
     />
     <slot></slot>
