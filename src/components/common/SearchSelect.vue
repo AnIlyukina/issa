@@ -36,10 +36,10 @@ const changeValue = (selected) => {
   emits('update:modelValue', selected)
 }
 
-const getCity = debounce ((loading, search, vm) =>
+const getCity = debounce (async (loading, search, vm) =>
   {
     try {
-      const response = api.get(apiUrl.value + search)
+      const response = await api.get(apiUrl.value + search)
       options.value = response.data
     } catch (e) {
       console.log(e)
@@ -97,7 +97,7 @@ const getCity = debounce ((loading, search, vm) =>
   --vs-search-input-color: rgb(0, 0, 0); */
 
   --vs-border-color: none;
-  --vs-dropdown-option--active-bg: #664cc3;
+  --vs-dropdown-option--active-bg: rgb(173, 162, 162);
   --vs-dropdown-option--active-color: #eeeeee;
 }
 

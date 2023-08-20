@@ -49,7 +49,7 @@ const changeValueGenderLooking = (value) => {
     />
     <search-select
       v-model="stateProfile.city"
-      api-url="'/city?city='"
+      api-url="/city/search?city="
       :error="stateError.city"
       @update:modelValue="changeValueCity"
     />

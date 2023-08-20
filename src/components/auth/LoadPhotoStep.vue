@@ -1,5 +1,8 @@
 <script setup>
 
+import { Cropper } from 'vue-advanced-cropper';
+import 'vue-advanced-cropper/dist/style.css';
+
 const changeProfileImage = (event) => {
   console.log(event, 'event');
 }
@@ -35,5 +38,13 @@ const changeProfileImage = (event) => {
       class="hidden"
       @change="changeProfileImage"
     >
+    <cropper
+      class="cropper"
+      src="https://images.unsplash.com/photo-1600984575359-310ae7b6bdf2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80"
+      :stencil-props="{
+        aspectRatio: 10/12
+      }"
+      @change="change"
+    />
   </div>
 </template>

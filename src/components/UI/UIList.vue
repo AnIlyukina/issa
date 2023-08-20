@@ -47,11 +47,14 @@ const isSelected = (id) => {
 </script>
 
 <template>
-  <li v-for="item in list" class="flex gap-4 mt-5">
+  <li
+    v-for="item in list"
+    class="flex gap-4 mt-5 cursor-pointer"
+    @click="selectItem(item)"
+  >
     <div
       class="w-[25px] h-[25px] border border-1 border-black dark:border-white rounded"
       :class="[isSelected(item.id) > -1 ? 'dark:bg-white' : '']"
-      @click="selectItem(item)"
     />
     <span>{{ item.name }}</span>
   </li>

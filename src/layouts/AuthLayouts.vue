@@ -10,7 +10,8 @@
     dark:bg-auth-dark2
     w-[100%]
     bg-center
-    h-[100vh]
+    min-h-[100vh]
+    pb-[50px]
     bg-cover
     bg-no-repeat
     "

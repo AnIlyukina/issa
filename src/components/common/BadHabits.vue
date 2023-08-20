@@ -23,6 +23,7 @@ const changeBadHabbit = (value) => {
   <ul>
     <h3 class="dark:text-white">У тебя есть вредные привычки?</h3>
     <u-i-list
+      multi
       :list="profileData.badHabitList"
       :state="stateProfile.badHabbit"
       @update:state="changeBadHabbit"
